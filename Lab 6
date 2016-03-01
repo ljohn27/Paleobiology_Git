@@ -1,0 +1,59 @@
+Problem Set 1
+
+1) As part of our matching procedure between the Macrostrat database and the Paleobiology database, we lost some data - i.e., there was some Paleobiology Database occurrences that could not be matched to the Macrostrat database. How many occurrences were lost? Show your code.
+
+> dim(MacroPBDB)
+[1] 9013   13
+> dim(DataPBDB)
+[1] 34166    26
+
+#Total number of occurences lost
+> 34166-9013
+[1] 25153
+
+2) Using what you know about the Macrostrat database can you speculate as to why so much data was lost?
+The "DataPBDB" is a global dataset, while "MacroPBDB" is limited to only North America, which would cut out a significant amount of data. 
+-----------
+Problem Set 2
+
+1) A good candidate for classification as a lagerstätten should have high diversity of different taxnomic orders. Calculate the order-level richness of each stratigraphic formation. Find the top 10 candidate units by this criteria. State them and give the code you used. Also, create a character vector( ) listing the names of these stratigraphic units. Name this vector CandidateUnits.
+
+> RichnessOM<-specnumber(OrderMatrix)
+> sort(RichnessOM)
+> OrderedRichnessOM<-sort(RichnessOM)
+> length(OrderedRichnessOM)
+[1] 157
+> NamesRichOM<-OrderedRichnessOM[147:157]
+> CandidateUnits<-names(NamesRichOM)
+> CandidateUnits
+ [1] "Harkless Fm"      "Forteau Fm"       "Parker Slate"    
+ [4] "Snowy Range Fm"   "Weymouth Fm"      "Langston Fm"     
+ [7] "Wheeler Shale"    "Marjum Limestone" "Stephen Fm"      
+[10] "Kinzers Fm"       "Chancellor"  
+
+
+2) A good candidate for classification as a lagerstätten should have a large number of genera that are relatively rare. Using the GenusMatrix column to find out how many samples each genus occurs in. Show the code you used. Name your output GenusFrequencies.
+> GenusFrequencies<-apply(GenusMatrix,2,sum)
+
+
+3) What is the necessary code to make a frequency barplot of the GenusFrequencies?
+> barplot(table(GenusFrequencies))
+
+4) After looking at this barplot, you should see a familiar paleobiological pattern. What do we call this type of curved distribution in paleobiology and ecology. [Hint: Think back to the lectures]
+Hollow-curve distribution 
+
+5) Subset your new vector GenusFrequences so that only those genera from the lower 50% of the distribution are present. In other words genera with occurrences <= to the median( ). Show your code. Name this new subset vector as RareGenera.
+> RareGenera<-GenusFrequencies[which(GenusFrequencies<=2)]
+-----
+Problem Set 3
+1) Subset GenusMatrix so that it only shows the 10 stratigraphic units we determined were potential candidates. Show your code and name your new matrix, CandidateMatrix.
+
+CandidateMatrix<-GenusMatrix[CandidateUnits,]
+
+2) Based on the output of PercentShared and your answer to Problem Set 2 - Question 1 - i.e., the ranking of candidate units based on the number of orders represented, which four units do you think are most likely to qualify as Lagerstätten? Explain your reasoning.
+
+Chancellor stands out as the strongest candidate due to its high percentage of rare genera and number of high orders represented (0.5714286, 27). I believe that Weymouth Fm is the next best candidate, with its high percentage of rare genera and number of high orders of 0.6764706 and 16. The remaining candidates are not as clear when looking at the data, but I would consider Marjum Limestone and Stephen Fm as the next best in strength for Lagerstätten.
+
+3) Look closer into the into the four units you chose - using Google and information in the Paleobiology Database. One of these should be a very famous Lagerstätten. Which one? What is famous about it? What is its significance to Paleobiology?
+
+The Chancellor unit is the famous Lagerstätten. The chancellor basin is where new  Burgess Shale type biota have been found in southeastern British Columbia. The Burgess Shale includes genera of sponges, worms, some arthropods and brachipods; an even new taxa, including an arborescent, benthic graptolite with preserved fuselli. This is significant to the field of paleobiology due to the discovery of organisms (some even new) through fossil preservation.  
