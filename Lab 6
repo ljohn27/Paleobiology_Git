@@ -1,7 +1,10 @@
-Problem Set 1
+> 20/20. Great job!
+
+### Problem Set 1
 
 1) As part of our matching procedure between the Macrostrat database and the Paleobiology database, we lost some data - i.e., there was some Paleobiology Database occurrences that could not be matched to the Macrostrat database. How many occurrences were lost? Show your code.
 
+````R
 > dim(MacroPBDB)
 [1] 9013   13
 > dim(DataPBDB)
@@ -10,14 +13,16 @@ Problem Set 1
 #Total number of occurences lost
 > 34166-9013
 [1] 25153
+````
 
 2) Using what you know about the Macrostrat database can you speculate as to why so much data was lost?
 The "DataPBDB" is a global dataset, while "MacroPBDB" is limited to only North America, which would cut out a significant amount of data. 
------------
-Problem Set 2
+
+### Problem Set 2
 
 1) A good candidate for classification as a lagerstätten should have high diversity of different taxnomic orders. Calculate the order-level richness of each stratigraphic formation. Find the top 10 candidate units by this criteria. State them and give the code you used. Also, create a character vector( ) listing the names of these stratigraphic units. Name this vector CandidateUnits.
 
+````R
 > RichnessOM<-specnumber(OrderMatrix)
 > sort(RichnessOM)
 > OrderedRichnessOM<-sort(RichnessOM)
@@ -30,25 +35,37 @@ Problem Set 2
  [4] "Snowy Range Fm"   "Weymouth Fm"      "Langston Fm"     
  [7] "Wheeler Shale"    "Marjum Limestone" "Stephen Fm"      
 [10] "Kinzers Fm"       "Chancellor"  
-
+````
 
 2) A good candidate for classification as a lagerstätten should have a large number of genera that are relatively rare. Using the GenusMatrix column to find out how many samples each genus occurs in. Show the code you used. Name your output GenusFrequencies.
-> GenusFrequencies<-apply(GenusMatrix,2,sum)
 
+````R
+> GenusFrequencies<-apply(GenusMatrix,2,sum)
+````
 
 3) What is the necessary code to make a frequency barplot of the GenusFrequencies?
+
+````R
 > barplot(table(GenusFrequencies))
+````
 
 4) After looking at this barplot, you should see a familiar paleobiological pattern. What do we call this type of curved distribution in paleobiology and ecology. [Hint: Think back to the lectures]
+
 Hollow-curve distribution 
 
 5) Subset your new vector GenusFrequences so that only those genera from the lower 50% of the distribution are present. In other words genera with occurrences <= to the median( ). Show your code. Name this new subset vector as RareGenera.
+
+````R
 > RareGenera<-GenusFrequencies[which(GenusFrequencies<=2)]
------
-Problem Set 3
+````
+
+### Problem Set 3
+
 1) Subset GenusMatrix so that it only shows the 10 stratigraphic units we determined were potential candidates. Show your code and name your new matrix, CandidateMatrix.
 
+````R
 CandidateMatrix<-GenusMatrix[CandidateUnits,]
+````
 
 2) Based on the output of PercentShared and your answer to Problem Set 2 - Question 1 - i.e., the ranking of candidate units based on the number of orders represented, which four units do you think are most likely to qualify as Lagerstätten? Explain your reasoning.
 
