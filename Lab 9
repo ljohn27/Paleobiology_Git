@@ -96,6 +96,11 @@ Problem Set II
 "genus" 
 
 5. 
+> x<-DataPBDB[,20]
+> y<-DataPBDB[,19]
+> plot(PaleoceneEoceneBoundaryMap,col=rgb(0,1,0,0.33),lty=0)
+> points(x,y,type="p")
+
 
 6. A great deal of Anthozoan occurences in the Eastern hemisphere are in Southeast China and Japan. They are primarily marine organisms, which means that salt water systems must have existed in this region of this world. As they tend to be sessile organisms, corals are likely to have existed as well.  
 -----------
