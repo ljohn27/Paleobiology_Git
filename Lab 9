@@ -24,17 +24,101 @@ The add=TRUE means is a command that tells the program to show/graph the data th
 Problem Set II 
 
 1. 
-> PaleoceneMap<-downloadPaleogeography(Age=59)
-> EoceneMap<-downloadPaleogeography(Age=56)
+
+> PaleoceneEoceneBoundaryMap<-downloadPaleogeography(Age=56)
 > plot(CretaceousMap,col=rgb(0,0,1,0.33),lty=0.01)
-> plot(PaleoceneMap,col=rgb(1,0,0,0.33),lty=0.01,add=TRUE)
-> plot(EoceneMap,col=rgb(0,1,0,0.33),lty=0.01,add=TRUE)
+> plot(ModernMap,col=rgb(1,0,0,0.33),lty=0.01,add=TRUE)
+> plot(PaleoceneEoceneBoundaryMap,col=rgb(0,1,0,0.33),lty=0.01,add=TRUE)
 
 2. 
 > DataPBDB<-downloadPBDB(Taxa=c("Anthozoa"),StartInterval="Paleocene",StopInterval="Eocene")
 
-3. 2847 occurences in total.  
-> OrderedPBDB<-table(DataPBDB)
-> OrderedPBDB
+3. 2848 occurences in total.  
+> dim(DataPBDB)
+[1] 2848   26
 
 4. 
+> dimnames(DataPBDB)
+[[2]]
+
+
+# Number of occurences 
+ [1] "occurrence_no"   
+# Type of an object for an occurence 
+"record_type"    
+#Unique identifer for a reidentified occurence 
+ "reid_no"         
+# Empty for most records, denoted by a letter r for an identification that has been superceded by a more recent identification. 
+"flags"  
+# Identifier of the collection with which the occurence is associated.         
+ [5] "collection_no"   
+# Taxonmic name for identification of the occurence. 
+"identified_name" 
+# Taxonomic rank of the identified name (if it can be determined).
+"identified_rank" 
+# Unique identifier of the identified taxonomic name. 
+"identified_no"  
+# Gives reason why the identified name is different from the accepted name. 
+ [9] "difference"    
+# Accepted taxonomic name corresponding to the identified name. 
+  "accepted_name"   
+# Taxonomic rank of the accepted name. 
+"accepted_rank"   
+# Unique identifier of the accepted taxonomic name in the given database. 
+"accepted_no" 
+# Specific geologic time range associated with occurence, or the beginning interval for a time range.    
+[13] "early_interval"  
+# Interval ending the specific geologic time range associated with the occurence (if different from value of "early_interval")
+"late_interval"   
+# Early bound of geologic time range associated with the occurence (in mya)
+"max_ma"          
+# Late bound of geologic time range associated with the occurence (in mya)
+"min_ma"    
+# Identifier of the reference from which the data was entered      
+[17] "reference_no"    
+# Primary model specified by the parameter pgm. This column will have information if more than one model is indicated. 
+"paleomodel"      
+# The paleolongitude of the collection, evaluated according to the primary model indicated by the parameter pgm. 
+"paleolng"        
+# Paleolatitude of the collection, evaluated according to the primary model indicated by the parameter pgm. 
+"paleolat"
+# Identifier of the geological plate on which the collection lies. Presented as either a number of string, it is evaluated by the primary model indicated by the parameter pgm.       
+[21] "geoplate"        
+# Name of the phylum in which this occurence is classified. 
+"phylum"          
+#Name of the class in which the occurence is classified. 
+"class"           
+#Name of the order in which the occurence is classified.
+"order"   
+#Name of the family in which the occurence is classified.       
+[25] "family"          
+#Name of the genus in which the occurence is classified.
+"genus" 
+
+5. 
+
+6. A great deal of Anthozoan occurences in the Eastern hemisphere are in Southeast China and Japan. They are primarily marine organisms, which means that salt water systems must have existed in this region of this world. As they tend to be sessile organisms, corals are likely to have existed as well.  
+-----------
+
+Problem Set III
+
+1. > DataPBDB2<-downloadPBDB(Taxa=c("Perissodactyla"),StartInterval="Paleogene",StopInterval="Paleogene")
+
+2. Perissodactyls walk on the terminal bones of the toes and have enlarged toenails forming from hoofs. They either walk on three toes (rhinos, tapirs) or on a single toe (recent horses). They are often referred to as "odd-toed" or "odd-hoofed" mammals. 
+
+3. 
+> DataPBDB2[,"collection_no"]
+#search for occurence of "11273" in the data 
+#Verify the correct row 
+> DataPBDB2[3951,"collection_no"]
+[1] 112723
+> DataPBDB2[3951,]
+
+4. The geoplate ID is 501. The location as it shows up in PBDB Navigator is in modern-day Pakistan. 
+
+5. There are 84 occurences. 
+> sort(DataPBDB2[,"geoplate"])
+
+6. The area has shifted south since the Albanian period to the present day. 
+
+7. When comparing the Paleogene map with the Modern Map in R, there is an overall  shift north over time in both Pakistan and China. Thus, it is more likely that the species migreated from Pakistan to China during the Paleogene, as opposed to migration from China to Pakistan. The idea that the species in China and Pakistan could probably both come from a third region is probable, as the northward shift during the time could have introduced species from Northern Africa when looking to occurences in the PBDB navigator.  
