@@ -1,8 +1,11 @@
-Lab 9 
+## Lab 9 
 
-Problem Set I 
-1. West
-2. plot(ModernMap,col=rgb(1,0,0,0.33),lty=0.01,add=TRUE)
+> 19/20
+
+## Problem Set I 
+
+1) West
+2) `plot(ModernMap,col=rgb(1,0,0,0.33),lty=0,add=TRUE)`
 
 The line of code is describing the following commands: 
 
@@ -10,37 +13,43 @@ Everything within the plot function notes what will be mapped-- in this case, th
 
 col=rgb(1,0,0,0.33) is a function calling for colors corresponding to their given intensities; in this case, it is the red, green and blue primary colors. Their respective intensities are deonted by the numbers ranging from 0 to 1. The first number 1 is the intensity of red, 0 for green and 0 for blue. 0.33 denotes the alpha value, which specifies a transparency value.  
 
-lty=0.01 corresponds to a function that interrupts the drawing of lines. In this case, the line will be interrupted every 0.01 places along the cooridnate system. 
+lty=0 corresponds to the line type
 
 The add=TRUE means is a command that tells the program to show/graph the data that corresponds/matches to the inputted information within the plot function. 
 
-4. > plot(AlbanianMap,col=rgb(0,1,0,0.33),lty=0.01,add=TRUE)
+4. `> plot(AlbanianMap,col=rgb(0,1,0,0.33),lty=0,add=TRUE)`
 
 5. North and South. 
 
 6. East and West.  
 
-----
-Problem Set II 
+## Problem Set II 
 
 1. 
 
+````R
 > PaleoceneEoceneBoundaryMap<-downloadPaleogeography(Age=56)
-> plot(CretaceousMap,col=rgb(0,0,1,0.33),lty=0.01)
-> plot(ModernMap,col=rgb(1,0,0,0.33),lty=0.01,add=TRUE)
-> plot(PaleoceneEoceneBoundaryMap,col=rgb(0,1,0,0.33),lty=0.01,add=TRUE)
+> plot(CretaceousMap,col=rgb(0,0,1,0.33),lty=0)
+> plot(ModernMap,col=rgb(1,0,0,0.33),lty=0,add=TRUE)
+> plot(PaleoceneEoceneBoundaryMap,col=rgb(0,1,0,0.33),lty=0,add=TRUE)
+````
 
 2. 
-> DataPBDB<-downloadPBDB(Taxa=c("Anthozoa"),StartInterval="Paleocene",StopInterval="Eocene")
+
+`> DataPBDB<-downloadPBDB(Taxa=c("Anthozoa"),StartInterval="Paleocene",StopInterval="Eocene")`
 
 3. 2848 occurences in total.  
+
+````R
 > dim(DataPBDB)
 [1] 2848   26
+````
 
 4. 
+
+````R
 > dimnames(DataPBDB)
 [[2]]
-
 
 # Number of occurences 
  [1] "occurrence_no"   
@@ -94,36 +103,47 @@ Problem Set II
 [25] "family"          
 #Name of the genus in which the occurence is classified.
 "genus" 
+````
 
 5. 
+
+````R
 > x<-DataPBDB[,20]
 > y<-DataPBDB[,19]
 > plot(PaleoceneEoceneBoundaryMap,col=rgb(0,1,0,0.33),lty=0)
-> points(x,y,type="p")
+> points(x,y)
+````
 
 
-6. A great deal of Anthozoan occurences in the Eastern hemisphere are in Southeast China and Japan. They are primarily marine organisms, which means that salt water systems must have existed in this region of this world. As they tend to be sessile organisms, corals are likely to have existed as well.  
------------
+6. A great deal of Anthozoan occurences in the Eastern hemisphere are in Southeast China and Japan. They are primarily marine organisms, which means that salt water systems must have existed in this region of this world. <strike>As they tend to be sessile organisms, corals are likely to have existed as well.</strike>
 
-Problem Set III
+> Almost all Anothozoans are corals. Most of the Anthozoan occurrences are in modern day Europe, indicating that there must have been an epicontinental sea at that time. -1 Points 
 
-1. > DataPBDB2<-downloadPBDB(Taxa=c("Perissodactyla"),StartInterval="Paleogene",StopInterval="Paleogene")
+## Problem Set III
+
+1. `> DataPBDB2<-downloadPBDB(Taxa=c("Perissodactyla"),StartInterval="Paleogene",StopInterval="Paleogene")`
 
 2. Perissodactyls walk on the terminal bones of the toes and have enlarged toenails forming from hoofs. They either walk on three toes (rhinos, tapirs) or on a single toe (recent horses). They are often referred to as "odd-toed" or "odd-hoofed" mammals. 
 
-3. 
+3.
+
+````R
 > DataPBDB2[,"collection_no"]
 #search for occurence of "11273" in the data 
 #Verify the correct row 
 > DataPBDB2[3951,"collection_no"]
 [1] 112723
 > DataPBDB2[3951,]
+````
 
 4. The geoplate ID is 501. The location as it shows up in PBDB Navigator is in modern-day Pakistan. 
 
 5. There are 84 occurences. 
+
+````R
 > sort(DataPBDB2[,"geoplate"])
+````
 
 6. The area has shifted south since the Albanian period to the present day. 
 
-7. When comparing the Paleogene map with the Modern Map in R, there is an overall  shift north over time in both Pakistan and China. Thus, it is more likely that the species migreated from Pakistan to China during the Paleogene, as opposed to migration from China to Pakistan. The idea that the species in China and Pakistan could probably both come from a third region is probable, as the northward shift during the time could have introduced species from Northern Africa when looking to occurences in the PBDB navigator.  
+7. When comparing the Paleogene map with the Modern Map in R, there is an overall  shift north over time in both Pakistan and China. Thus, it is more likely that the species migreated from Pakistan to China during the Paleogene, as opposed to migration from China to Pakistan. The idea that the species in China and Pakistan could probably both come from a third region is probable, as the northward shift during the time could have introduced species from Northern Africa when looking to occurences in the PBDB navigator.
