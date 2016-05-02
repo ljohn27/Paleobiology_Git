@@ -1,0 +1,23 @@
+Lab 14 
+
+Problem Set I 
+
+
+1) Which taxon names appear most often? Print the top 20 taxa. 
+Lari, Aves, Pici, Ferae, Ferae, Ralli, Alcae, Calcarea, Scopi, Ostracoda, Boidae, Gastropoda, Acari, Theria, Annulata, Trilobita, Galea, Articulata, Articulata, Brachiopoda 
+
++What are the commonly used or colloquial names for these 20 taxa, if any? (Look them up online if you need to.) 
+
+Ostracod, Gastropod, Trilobite, Brachiopod, Bird, Boas/Boids/Boioids, Acarina, 
+
+
+2) Which of these are probably not good data? Why? 
+
+Lari ("Lar"), Aves ("Ave"), Pici ("Pic"), Ralli ("Rall"), Ferae ("Fera"), Scopi ("Scop"), Acare ("Acar"), Theria ("Theri"), Galea ("Gale"), Alcae ("Alca"). These are probably not good data because the corresponding string names indicated in partentheses are small or common snippets that could correspond to other words, not only to the taxon. 
+
+3) Conversely, which taxa are likely candidates for pyritization, and why?
+
+Calcarea, Ostracoda, Trilobita, Brachiopoda. 
+
+These organisms are likely candidates for pyritization because they are likely to be found in low oxygen conditions. 
+
