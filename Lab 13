@@ -1,0 +1,100 @@
+Problem Set I 
+
+1) What is the total biodiverisity (generic richness) of OrdovicianMatrix and SilurianMatrix? In the alpha, beta, and gamma ADDITIVE diveristy partitioning paradigm, does this number represent alpha, beta, or gamma biodiversity? Show your code.
+
+Generic richness for OrdovicianMatrix is 23, it is 53 for SilurianMatrix. This number represents the gamma biodiversity, for it is the total diversity of all samples. 
+
+> dim(OrdovicianMatrix)
+[1] 15 23 
+> dim(SilurianMatrix)
+[1] 29 53
+
+
+2) What is the average biodiversity of all sample (stratigraphic units) in Ordovicianmatrix and SilurianMatrix? In the alpha, beta, and gamma ADDITIVE diveristy partitioning paradigm, does this number represent alpha, beta, or gamma biodiversity? Show your code
+
+The average biodiversity of all samples in the OrdovicianMatrix is 13.13333 while SilurianMatrix is 21. This number represents the alpha biodiversity, for it is the average diversity of all samples. 
+
+> mean(rowSums(SilurianMatrix))
+[1] 21
+> mean(rowSums(OrdovicianMatrix))
+[1] 13.13333
+
+3) What is the difference between the average biodiversity of all samples (stratigraphic units) in OrdovicianMatrix and the total biodiversity of OrdovicianMatrix. What about for the Silurian? In the alpha, beta, and gamma ADDITIVE diveristy partitioning paradigm, does this number represent alpha, beta, or gamma biodiversity? Show your code.
+
+The difference for OrdovicianMatrix is 9.86667 while the difference for SilurianMatrix is 32. This number represents beta diversity. 
+
+#Ordovician Beta Diversiry
+> BetaOrdov<-23-13.13333
+> BetaOrdov
+[1] 9.86667
+
+#Silurian Beta Diversity 
+> BetaSilurian<-53-21
+> BetaSilurian
+[1] 32
+
+4) Using the same ADDITIVE diversity partitioning schema, does alpha diveristy increase between the Ordovician and Silurian? Does beta diversity? Does gamma diversity? By how much?
+
+From the Ordovician to the Silurian the alpha diversity increases by 7.86667; the beta diversity increases by 22.13333; the gamma diversity increases by 30. 
+
+5) Sampling is different between the Ordovician and Silurian, which makes a direct comparison of the numbers questionable. Sometimes we try to get around this by representing alpha and beta as percentages of gamma.
+
+- What is the alpha diveristy of OrdovicianMatrix and SilurianMatrix as a percentage of their respective gamma diversities?
+
+#Ordovician
+> (13.13333/23)*100
+[1] 57.10143
+
+#Silurian
+> (21/53)*100
+[1] 39.62264
+
+- What is the beta diversity of OrdovicianMatrix and SilurianMatrix as a percentage of their respective gamma diversities?
+
+#Ordovician
+> (9.86667/23)*100
+[1] 42.89857
+
+#Silurian
+> (32/53)*100
+[1] 60.37736
+
+- Does alpha increase or decrease across the Ordovician Silurian boundary when measured as a percentage?
+
+Decrease 
+
+- Conceptually does this mean that Silurian faunas are more cosmopolitan (found in more places around North America) or are less cosmopolitan (found in fewer places around North America) following the Ordovician/Silurian mass extinction.
+
+They are more cosmopolitan because a decrease in alpha results in an increase in beta, the true indicator of cosmopolitanism. 
+
+- Does this match what we learned about Silurian cosmpolitanism in class?
+
+No, it was presented in class that alpha diversirt had stayed approximately the same across the boundary. 
+
+6) What is one drawback of using percentages to compare chaging alpha, beta, and gamma biodiversity between two time intervals?
+
+Utilizing percentages is a way of standardization, but may not reflect the trends and magnitudes captured in the raw data. Consequently, insightful information  carried in the raw information that is pertinent to characterizing each interval may be lost. 
+
+----------------------
+Problem Set II 
+
+1) Using what we did above as a guide, download comparable datasets for the End-Permian extinction and End-Cretaceous extinction and process them as we did above (Steps 2-5). Show your code.
+
+# Late Permian (Guadalupian-Lopingian)
+> LatePermian<-downloadPBDB(Taxa="Animalia",StartInterval="Guadalupian",StopInterval="Lopingian")
+> LatePermian<-cleanRank(LatePermian,"genus")
+> LatePermian<-constrainAges(LatePermian,Epochs)
+> LatePermian<-macrostratMatch(LatePermian)
+> LatePermianMatrix<-presenceMatrix(LatePermian,SampleDefinition="unit_name",TaxonRank="genus")
+> LatePermianMatrix<-cullMatrix(OrdovicianMatrix,2,10)
+
+
+# Early Triassic (Induan-Ladinian)
+> EarlyTriassic<-downloadPBDB(Taxa="Animalia",StartInterval="Induan",StopInterval="Ladinian")
+> EarlyTriassic<-cleanRank(EarlyTriassic,"genus")
+
+# Late Cretaceous (Santonian-Maastrichtian)
+> EarlyCretaceous<-downloadPBDB(Taxa="Animalia",StartInterval="Santonian",StopInterval="Maastrichtian")
+
+# Early Paleogene (Danian-Lutetian)
+> EarlyPaleogene<-downloadPBDB(Taxa="Animalia",StartInterval="Danian",StopInterval="Lutetian")
