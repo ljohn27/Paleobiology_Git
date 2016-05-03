@@ -106,8 +106,89 @@ Aaptoryctes    Aardonyx   Abderites  Abdounodus  Abelichnus Abelisaurus
 
 4) Find which genera of your Triassic dataset were Diapsids and which were Synapsids. Show your code.
 
-> subset(PostTriDiSyn,PostTriDiSyn[,"genus"]%in%JurassicSynapsids[,"genus"]==TRUE)
-> subset(PostTriDiSyn,PostTriDiSyn[,"genus"]%in%JurassicDiapsids[,"genus"]==TRUE)
+> PostTriSynapids<-subset(PostTriDiSyn,PostTriDiSyn[,"genus"]%in%JurassicSynapsids[,"genus"]==TRUE)
+
+> PostTriDiapsids<-subset(PostTriDiSyn,PostTriDiSyn[,"genus"]%in%JurassicDiapsids[,"genus"]==TRUE)
 
 5) Perform a logistic regression where the outcome variable is Survivor/Victim and the input variable is the mean latitude of each genus. Show your code. Was the mean latitude of a Triassic genus a good predictor of its survival across the T/J extinction?
 
+#Creating a Matrix
+> PTVictims<-array(0,dim=length(PostTriVictims),dimnames=list(PostTriVictims))
+> head(PTVictims)
+> FinalMatrix<-merge(MeanLatitudesTri,PTVictims,all=TRUE,by="row.names")
+> head(FinalMatrix)
+    Row.names         x y
+1 Aaptoryctes  52.72333 0
+2    Aardonyx -42.64000 0
+3   Abderites -36.81500 0
+4  Abdounodus  34.32000 0
+5  Abelichnus -38.33000 0
+6 Abelisaurus -39.85000 0
+
+#Cleaning up the matrix 
+> FinalMatrix<-transform(FinalMatrix,row.names=Row.names,Row.names=NULL)
+> colnames(FinalMatrix)<-c("MeanLatitudes","Survivor/Victim")
+> head(FinalMatrix)
+            MeanLatitudes Survivor/Victim
+Aaptoryctes      52.72333               0
+Aardonyx        -42.64000               0
+Abderites       -36.81500               0
+Abdounodus       34.32000               0
+Abelichnus      -38.33000               0
+Abelisaurus     -39.85000               0
+
+#Calculate logisitic regression
+> Regression<-glm(FinalMatrix[,"Survivor/Victim"]~FinalMatrix[,"MeanLatitudes"],family="binomial")
+> summary(Regression)
+
+Call:
+glm(formula = FinalMatrix[, "Survivor/Victim"] ~ FinalMatrix[, 
+    "MeanLatitudes"], family = "binomial")
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-0.24129  -0.11678  -0.09168  -0.08633   3.13451  
+
+Coefficients:
+                                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                    -4.889136   0.148167 -32.997  < 2e-16 ***
+FinalMatrix[, "MeanLatitudes"] -0.016047   0.003888  -4.127 3.68e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 559.61  on 7438  degrees of freedom
+Residual deviance: 543.68  on 7437  degrees of freedom
+  (6 observations deleted due to missingness)
+AIC: 547.68
+
+Number of Fisher Scoring iterations: 8
+
+The slope tells us that for every one degree increase in the lattude of the genus, its (log) odds of having survived the T/J event decreases by 0.016047. Yes, the mean latitudes of the Triassic genus was a good predictor of extinction across the T/J extinction.  
+
+-----------------------------------------------
+Extra Credit
+
+Perform a multiple logistic regression where the outcome variable is Survivor/Victim status and the input variables are the mean latitude of each genus and whether the gneus is a Diapsid/Synapsid. Is status as a Synapsid/Diapsid more or less important average paleolatitude of occurrences for survival? Show your code.
+
+#Matrix for Survivor/Victim
+> PTVictims<-array(0,dim=length(PostTriVictims),dimnames=list(PostTriVictims))
+
+#Matrix for Synapsid/Diapsid
+> PTriSynapsids<-array(0,dim=length(PostTriSynapids), dimnames=list(PostTriSynapids))
+
+#Creating and Cleaning the Final Matrix
+> FinalMatrix2<-merge(MeanLatitudesTri,PTriSynapsids,PTVictims,all=TRUE,by="row.names")
+
+> FinalMatrix2<-transform(FinalMatrix,row.names=Row.names,Row.names=NULL)
+> colnames(FinalMatrix)<-c("MeanLatitudes","Synapsid/Diapsid","Survivor/Victim")
+
+> FinalMatrix[is.na(FinalMatrix[,"Survivor/Victim"],[,"Synapsid/Diapsid"]),]<-1
+> head(FinalMatrix2)
+
+#Run logisitic regression
+>Regression<-glm(FinalMatrix2[,"Survivor/Victim"]~FinalMatrix[,"MeanLatitudesTri"] + [,"Synapsid/Diapsid"],family="binomial")
+>summary(Regression)
+
+The status of synapsid/diapsid is more important than average paleolatitudes when considering occurences for survival because both synapsids and diapsids were present before and after the T/J extinction; thus it is not deemed as critical when attempting to speculate survival. 
