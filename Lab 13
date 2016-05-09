@@ -86,15 +86,280 @@ Problem Set II
 > LatePermian<-constrainAges(LatePermian,Epochs)
 > LatePermian<-macrostratMatch(LatePermian)
 > LatePermianMatrix<-presenceMatrix(LatePermian,SampleDefinition="unit_name",TaxonRank="genus")
-> LatePermianMatrix<-cullMatrix(OrdovicianMatrix,2,10)
+> LatePermianMatrix<-cullMatrix(LatePermianMatrix,2,10)
 
 
 # Early Triassic (Induan-Ladinian)
 > EarlyTriassic<-downloadPBDB(Taxa="Animalia",StartInterval="Induan",StopInterval="Ladinian")
 > EarlyTriassic<-cleanRank(EarlyTriassic,"genus")
+> EarlyTriassic<-constrainAges(EarlyTriassic,Epochs)
+> EarlyTriassic<-macrostratMatch(EarlyTriassic)
+> EarlyTriassicMatrix<-presenceMatrix(EarlyTriassic,SampleDefinition="unit_name",TaxonRank="genus")
+> EarlyTriassicMatrix<-cullMatrix(EarlyTriassicMatrix,2,10)
 
 # Late Cretaceous (Santonian-Maastrichtian)
-> EarlyCretaceous<-downloadPBDB(Taxa="Animalia",StartInterval="Santonian",StopInterval="Maastrichtian")
+> LateCretaceous<-downloadPBDB(Taxa="Animalia",StartInterval="Santonian",StopInterval="Maastrichtian")
+> LateCretaceous<-cleanRank(LateCretaceous,"genus")
+> LateCretaceous<-constrainAges(LateCretaceous,Epochs)
+> LateCretaceous<-macrostratMatch(LateCretaceous)
+> LateCretaceousMatrix<-presenceMatrix(LateCretaceous,SampleDefinition="unit_name",TaxonRank="genus")
+> LateCretaceousMatrix<-cullMatrix(LateCretaceousMatrix,2,10)
 
 # Early Paleogene (Danian-Lutetian)
 > EarlyPaleogene<-downloadPBDB(Taxa="Animalia",StartInterval="Danian",StopInterval="Lutetian")
+> EarlyPaleogene<-cleanRank(EarlyPaleogene,"genus")
+> EarlyPaleogene<-constrainAges(EarlyPaleogene,Epochs)
+> EarlyPaleogene<-macrostratMatch(EarlyPaleogene)
+> EarlyPaleogeneMatrix<-presenceMatrix(EarlyPaleogene,SampleDefinition="unit_name",TaxonRank="genus")
+> EarlyPaleogeneMatrix<-cullMatrix(EarlyPaleogeneMatrix,2,10)
+
+
+2) What are the Alpha, Beta, and Gamma biodiversitites for each downloaded time-interval (not measured as a percentage)? Show your code.
+
+For the Late Permian, alpha= 57.63636, beta= 253.3636, gamma= 311. 
+#Gamma diversity for the Late Permian 
+> dim(LatePermianMatrix)
+[1]  22 311
+#Alpha Diversity for Late Permian 
+> mean(rowSums(LatePermianMatrix))
+[1] 57.63636
+#Beta diversity for Late Permian
+> 311-57.63636
+[1] 253.3636
+
+For the Early Triassic, alpha= 35.15385, beta= 122.8461, gamma= 158. 
+#Gamma diversity for the Early Triassic
+> dim(EarlyTriassicMatrix)
+[1]  13 158
+#Alpha Diversity for the Early Triassic
+> mean(rowSums(EarlyTriassicMatrix))
+[1] 35.15385
+#Beta diversity for Early Triassic
+> 158-35.15385
+[1] 122.8461
+
+For the Late Cretaceous, alpha= 58.08333, beta= 717.9167, gamma= 776. 
+#Gamma diversity for the Late Cretaceous 
+> dim(LateCretaceousMatrix)
+[1]  96 776
+#Alpha diversity for the Early Cretaceous
+> mean(rowSums(LateCretaceoussMatrix))
+[1] 58.08333
+#Beta diversity for the Late Cretaceous
+> 776-58.08333
+[1] 717.9167
+
+For the Early Paleogene, alpha= 52.67769, beta= 981.3223, gamma= 1034. 
+#Gamma diversity for the Early Paleogene 
+> dim(EarlyPaleogeneMatrix)
+[1]  121 1034
+#Alpha diversity for the Early Paleogene
+> mean(rowSums(EarlyPaleogeneMatrix))
+[1] 52.67769
+#Beta Diversity for Early Paleogene 
+> 1034-52.67769
+[1] 981.3223
+
+3) What are the Alpha and Beta biodiversities for each downloaded time-interval (when measured as a percentage of gamma)? Show your code.
+
+#Late Permian 
+Alpha %:
+> (57.63636/311)*100
+[1] 18.53259
+
+Beta %: 
+> (253.3636/311)*100
+[1] 81.4674
+
+#Early Triassic
+Alpha %: 
+> (35.15385/158)*100
+[1] 22.24927
+
+Beta %: 
+> (122.8461/158)*100
+[1] 77.7507
+
+#Early Cretacous
+Alpha %: 
+> (58.08333/776)*100
+[1] 7.484965
+
+Beta %:
+> (717.9167/776)*100
+[1] 92.51504
+
+#Early Paleogene 
+Alpha %:
+> (52.67769/1034)*100
+[1] 5.094554
+
+Beta %: 
+> (981.3223/1034)*100
+[1] 94.90544
+
+4) Does Alpha biodiversity increase or decrease after each extinction event (not measured as a percentage)? Show your code.
+
+From the Late Permian to the Early Triassic, alpha decreased by 22.48251
+> LatePermiantoTriassicAlpha<-(57.63636-35.15385)
+> LatePermiantoTriassicAlpha
+[1] 22.48251
+
+From the Early Triassic to the Early Cretaceous, alpha increased by 22.92948
+> 35.15385-58.08333
+[1] -22.92948
+
+From the Early Cretaceous to the Early Paleogene, alpha decreased by 5.40564
+> 58.08333-52.67769
+[1] 5.40564
+
+5) Does Alpha biodiversity increase or decrease after each extinction event (when measured as a percentage of gamma)? Show your code.
+
+From the Late Permian to the Early Triassic, alpha% increased by 3.71668
+> 18.53259-22.24927
+[1] -3.71668
+
+From the Early Triassic to the Early Cretaceous, alpha% decreased by 14.76431
+> 22.24927-7.484965
+[1] 14.76431
+
+From the Early Cretaceous to the Early Paleogene, alpha% decreased by 2.390411
+> 7.484965-5.094554
+[1] 2.390411
+
+--------------------------------------------------------------
+
+Problem Set III
+
+1) Using what we did above as a guide, download comparable datasets for the End-Ordovician, End-Permian, and End-Cretaceous extinctions and process them as we did above (Steps 2-5). BUT, this time, use the abundanceMatrix( ) function instead of presenceMatrix( ).
+
+#Late Ordovician 
+> LateOrdovician<-downloadPBDB(Taxa="Animalia",StartInterval="Sandbian",StopInterval="Hirnantian")
+> LateOrdovician<-cleanRank(LateOrdovician,"genus")
+> LateOrdovician<-constrainAges(LateOrdovician,Epochs)
+> LateOrdovician<-macrostratMatch(LateOrdovician)
+> LateOrdovicianMatrix<-abundanceMatrix(LateOrdovician,SampleDefinition="unit_name",TaxonRank="genus")
+> LateOrdovicianMatrix<-cullMatrix(LateOrdovicianMatrix,2,10)
+
+#Early Silurian 
+> EarlySilurian<-downloadPBDB(Taxa="Animalia",StartInterval="Llandovery",StopInterval="Wenlock")
+> EarlySilurian<-cleanRank(EarlySilurian,"genus")
+> EarlySilurian<-constrainAges(EarlySilurian,Epochs)
+> EarlySilurian<-macrostratMatch(EarlySilurian)
+> EarlySilurianMatrix<-abundanceMatrix(EarlySilurian,SampleDefinition="unit_name",TaxonRank="genus")
+> EarlySilurianMatrix<-cullMatrix(EarlySilurianMatrix,2,10)
+
+#Late Permian
+> LatePermian<-downloadPBDB(Taxa="Animalia",StartInterval="Guadalupian",StopInterval="Lopingian")
+> LatePermian<-cleanRank(LatePermian,"genus")
+> LatePermian<-constrainAges(LatePermian,Epochs)
+> LatePermian<-macrostratMatch(LatePermian)
+> LatePermianMatrix<-abundanceMatrix(LatePermian,SampleDefinition="unit_name",TaxonRank="genus")
+> LatePermianMatrix<-cullMatrix(LatePermianMatrix,2,10)
+
+#Early Triassic
+> EarlyTriassic<-downloadPBDB(Taxa="Animalia",StartInterval="Induan",StopInterval="Ladinian")
+> EarlyTriassic<-cleanRank(EarlyTriassic,"genus")
+> EarlyTriassic<-constrainAges(EarlyTriassic,Epochs)
+> EarlyTriassic<-macrostratMatch(EarlyTriassic)
+> EarlyTriassicnMatrix<-abundanceMatrix(EarlyTriassic,SampleDefinition="unit_name",TaxonRank="genus")
+> EarlyTriassicMatrix<-cullMatrix(EarlyTriassicMatrix,2,10)
+
+#Late Cretaceous 
+> LateCretaceous<-downloadPBDB(Taxa="Animalia",StartInterval="Santonian",StopInterval="Maastrichtian")
+> LateCretaceous<-cleanRank(LateCretaceous,"genus")
+> LateCretaceous<-constrainAges(LateCretaceous,Epochs)
+> LateCretaceous<-macrostratMatch(LateCretaceous)
+> LateCretaceousMatrix<-abundanceMatrix(LateCretaceous,SampleDefinition="unit_name",TaxonRank="genus")
+> LateCretaceousMatrix<-cullMatrix(LateCretaceousMatrix,2,10)
+
+#Early Paleogene
+> EarlyPaleogene<-downloadPBDB(Taxa="Animalia",StartInterval="Danian",StopInterval="Lutetian")
+> EarlyPaleogene<-cleanRank(EarlyPaleogene,"genus")
+> EarlyPaleogene<-constrainAges(EarlyPaleogene,Epochs)
+> EarlyPaleogene<-macrostratMatch(EarlyPaleogene)
+> EarlyPaleogeneMatrix<-abundanceMatrix(EarlyPaleogene,SampleDefinition="unit_name",TaxonRank="genus")
+> EarlyPaleogeneMatrix<-cullMatrix(EarlyPaleogeneMatrix,2,10)
+
+
+2) What are the Alpha, Beta, and Gamma biodiversity for each downloaded time-interval (not measured as a percentage) if biodiversity is measured as the exponentiated Shannon's Entropy? Show your code.
+
+For the Late Ordovician, alpha= 117.0526, beta= 93.9474, gamma= 211. 
+#Gamma diversity for the Late Permian 
+> dim(LateOrdovicianMatrix)
+[1]  38 211
+#Alpha Diversity for LateOrdovician
+> mean(rowSums(LateOrdovicianMatrix))
+[1] 117.0526
+#Beta diversity for LateOrdovician
+> 311-57.63636
+[1] 93.9474
+
+For the Early Silurian, alpha= 181.9167, beta= 241.0833, gamma= 423. 
+#Gamma diversity for the Early Silurian
+> dim(EarlySilurianMatrix)
+[1]  48 423
+#Alpha Diversity for the EarlySilurian
+> mean(rowSums(EarlySilurianMatrix))
+[1] 181.9167
+#Beta diversity for EarlySilurian
+> 423-181.9167
+[1] 241.0833
+
+For the Late Permian, alpha= 406.2727, beta= -95.2727, gamma= 311. 
+#Gamma diversity for the Late Permian
+> dim(LatePermianMatrix)
+[1]  22 311
+#Alpha diversity for the LatePermian
+> mean(rowSums(LatePermianMatrix))
+[1] 406.2727
+#Beta diversity for the LatePermian
+> 311-406.2727
+[1] -95.2727
+
+For the Early Triassic, alpha= 35.15385, beta= 122.8461, gamma= 158. 
+#Gamma diversity for the EarlyTriassic
+> dim(EarlyTriassicMatrix)
+[1]  13 158
+#Alpha diversity for the EarlyTriassic
+> mean(rowSums(EarlyTriassicMatrix))
+[1] 35.15385
+#Beta Diversity for EarlyTriassic
+> 158-35.15385
+[1] 122.8461
+
+For the LateCretaceous, alpha= 298.4062, beta= 477.5938, gamma= 776. 
+#Gamma diversity for the LateCretaceous
+> dim(LateCretaceousMatrix)
+[1]  96 776
+#Alpha diversity for the LateCretaceous
+> mean(rowSums(LateCretaceousMatrix))
+[1] 298.4062
+#Beta Diversity for LateCretaceous
+> 776-298.4062
+[1] 477.5938
+
+For the EarlyPaleogene, alpha= 207.4628, beta= 826.5372, gamma= 1034. 
+#Gamma diversity for the EarlyPaleogene
+> dim(EarlyPaleogeneMatrix)
+[1]  121 1034
+#Alpha diversity for the EarlyPaleogene
+> mean(rowSums(EarlyPaleogeneMatrix))
+[1] 207.4628
+#Beta Diversity for EarlyPaleogene
+> 1034-207.4628
+[1] 826.5372
+
+
+3) What are the Alpha, Beta, and Gamma biodiversity for each downloaded time-interval (when measured as a percentage of gamma) if biodiversity is measured as the exponentiated Shannon's Entropy? Show your code.
+
+4) Does Alpha biodiversity increase or decrease after each extinction event (not measured as a percentage)? Show your code.
+
+5) Does Alpha biodiversity increase or decrease after each extinction event (when measured as a percentage of gamma)? Show your code.
+
+---------------------------------------------------------------------
+Problem Set III
+
+Based on your results across problem sets 1, 2, and 3, do you believe that Beta diversity tends to increase, decrease, or neither after mass extinction events as a general rule?
+
+Beta diversity tends to increase 
