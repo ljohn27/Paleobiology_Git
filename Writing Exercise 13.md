@@ -3,14 +3,20 @@ Geoscience 541
 Writing Exercise 
 4/25/16 
 “Dinosaurs in decline tens of millions of years before their final extinction” by Manabu Sakamoto, Michael J. Brenton and Chris Venditti (2016)
-Summary 
+
+> 10/10
+
+## Summary 
 	This article addresses a major question surrounding dinosaur extinction: whether or not they were in long-term decline or had a strong presence up until their final disappearance at the Cretaceous-Paleogene mass extinction event. Over time, this has been an unresolved debate for the lack of statistical prowess under the context of an appropriate evolutionary framework. The authors of this work offer a statistical method that exclusively utilizes a phylogenetic approach (specifically the generalized mixed model) in a Bayesian framework. Speciation dynamics are studied to uncover the relationship between speciation and extinction rates of dinosaurs in the years preceding their extinction. 
 	Overall, the study found an overwhelming amount of support for a long-term decline across all dinosaurs and within all three dinosaurian subclades. The results show that dinosaurs showed a marked reduction in their ability to replace extinct species with new ones, making them vulnerable to extinction. This caused an inability to respond quickly to and recover from the catastrophic event at 66 million years ago. 
-Positive Feedback 
+
+## Positive Feedback 
 	I thought that the section regarding extrinsic factors under the materials and methods section was a smart addition to the article. First, the acknowledgement of gaps in the fossil record recognizes the possible errors that could arise from this analysis. By testing for downward bias and poor sampling, the data presents itself as stronger when showcasing the results. I appreciated the information regarding fitting additional models with appropriate covariates. Additionally, testing indirect measures of the influence of geography on speciation dynamics also served to acknowledge other discrepancies that could have skewed the data. This included segregation by geographic barriers, ecological limits on clade diversification or the possible effects of niche saturation by adding a measure of interclade diversity as the number of contemporary branches for each taxon. 
-Constructive Feedback 
+
+## Constructive Feedback 
 	Overall, I felt that this article was well-presented and supports its findings in a manner that was easy to follow and understand. The one critique that comes to mind is to offer a well-rounded justification for the use of the Bayesian model. Though it seems like an appropriate approach for the objective at hand, I felt that it could have been better justified when stacked against the other models that could have been utilized. As a reader with limited knowledge about statistical modelling methods, information on why the Bayesian was the most preferred for this study would have been helpful, and allotted for greater confidence in the study overall. 
-Evaluation of Figures 
+
+## Evaluation of Figures 
 	Figure one is a graph showing the theoretical models of speciation through time. Model A shows a linear increase over time in the logarithm of the number of speciation events along each path of a phylogenetic tree. Models B and C show what would happen if speciation rate decreased throughout time but remained above the extinction rate, ultimately showing a curvilinear relationship. However, such a relationship would eventually reach an asymptote (in which speciation equals extinction, as seen in model B). If it were to continue, it would eventually continue as an extinction rate that surpasses speciation during the evolutionary history of the clade, as seen in model C. 
 	Figure two is composed of two graphs, each of which model predictions of speciation through time in Mesozoic dinosaurs. Map A compares the linear model with the quadratic model, showing that speciation slowdown substantially improves the model fit. Graph B shows that the pattern holds true in three major clades of Ornithischia, Sauropofomorpha and Theropoda. Both graphs depict time elapsed in millions of years vs. the log node count. 
 	Composed of two graphs, figure three depicts the time elapsed in millions of years vs. the net speciation per year in millions of years. The next speciation per 1 million year through time in Mesozoic dinosaurs is shown, as calculated from model predictions. Graph A shows each branch of a dinosaurian phylogeny was assigned a net speciation per 1 million year based on its temporal location and group membership. On the other hand, Graph B shows the three major dinosaur showing an early onset of speciation slowdown until the middle of the Early Cretaceous when speciation rates are exceeded by extinction rate. 
