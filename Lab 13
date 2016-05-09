@@ -354,9 +354,10 @@ For the EarlyPaleogene, alpha= 207.4628, beta= 826.5372, gamma= 1034.
 3) What are the Alpha, Beta, and Gamma biodiversity for each downloaded time-interval (when measured as a percentage of gamma) if biodiversity is measured as the exponentiated Shannon's Entropy? Show your code.
 
 4) Does Alpha biodiversity increase or decrease after each extinction event (not measured as a percentage)? Show your code.
+Alpha biodiversity decreases. 
 
 5) Does Alpha biodiversity increase or decrease after each extinction event (when measured as a percentage of gamma)? Show your code.
-
+Alpha biodiversity decreases. 
 ---------------------------------------------------------------------
 Problem Set III
 
