@@ -1,3 +1,5 @@
+> 20/20, with some EC
+
 Lab 12 
 
 Problem Set I
